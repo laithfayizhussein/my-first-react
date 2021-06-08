@@ -1,7 +1,9 @@
 import React from 'react';
 import HornedBeasts from './HornedBeasts';
-import JSONData from './animalsData.json';
+import Data from './animalsData.json';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import SelectedBeast from './component/SelectedBeast';
+
 
 class Main extends React.Component {
 
@@ -9,9 +11,14 @@ class Main extends React.Component {
 
     return (
       <div className='card-group'>
-        {JSONData.map(item => {
+        {Data.map(item => {
           return (
-            <HornedBeasts title={item.title} hornsCount={item.horns} imgUrl={item.image_url} description={item.description} keyword={item.keyword} />
+            <HornedBeasts 
+            title={item.title} 
+            hornsCount={item.horns} 
+            imgUrl={item.image_url} 
+            description={item.description} 
+            keyword={item.keyword} />
           );
         })}
       </div>
