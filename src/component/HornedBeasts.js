@@ -15,25 +15,51 @@ class HornedBeasts extends React.Component {
     this.setState(
       {clicks: this.state.clicks+1,}
       );}
+      modalShow=()=>{
+        this.props.modalShow(this.props.title)
+    }
 
   render() {
     return (
       <div>
-                <Card style={{ width: '470px'}}>
-                <Card.Img variant="top" width="200px" height="250px" title={this.props.keyword} src={this.props.imgUrl} />
-          <Card.Body>
-            <Card.Title>{this.props.title}</Card.Title>
+            <Card style={{ width: '470px'}}>
+
+              <Card.Img
+                 onClick = {this.modalShow}
+                  variant="top" 
+                  width="200px" 
+                  height="250px"
+                  title={this.props.keyword} 
+                  src={this.props.imgUrl} 
+                  />
+       
+      <Card.Body>
+          
+            <Card.Title>
+              {this.props.title}
+            </Card.Title>
+           
             <Card.Text>
-              {this.props.description}<br/>
-              <br/> <h4>horns: {this.props.hornsCount}</h4><br/>
-              <h5>Votes: {this.state.clicks}</h5><br/>
+              <p>{this.props.description}</p><br/>
+              
+              <br/><h4>
+                horns: {this.props.hornsCount}
+              </h4><br/>
+           
+              <h5>
+                Votes: {this.state.clicks}
+              </h5><br/>
             </Card.Text>
-            <Button onClick={this.animalsClicks} variant="primary">Click to Vote</Button>
+         
+            <Button
+             onClick={this.animalsClicks}
+              variant="primary">
+                Click to Vote
+           </Button>
+        
           </Card.Body>
       </Card>
       </div>
-
-
     );
   }
 }
