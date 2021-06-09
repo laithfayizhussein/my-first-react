@@ -1,53 +1,70 @@
 import React from 'react';
-import Header from './components/Header';
-import Main from './components/Main';
-import Footer from './components/Footer';
-import animalsData from './components/animalsData.json'
-import SelectedBeast from './component/SelectedBeast';
+import Header from './components/header';
+import Main from './components/main';
+import Footer from './components/footer';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Data from './components/Data.json';
+import SelectedBeast from './components/SelectedBeast';
+
 
 class App extends React.Component {
-  
-  constructor(props) {
-    super(props);
-    this.state = {
-      show: false,
-      selectedAnimal: {},
-      Data: Data,
+  constructor(props){
+    super(props)
+    this.state={
+      Data: Data ,
+      showModel: false ,
+      selectedBeast: {}
     }
   }
-  handleShow = () => {
+
+
+  updateForm=(newHorn)=>{
     this.setState({
-      show: true,
+      Data:newHorn
     })
   }
-  handleClose = () => {
-    this.setState({
-      show: false,
-    })
-  }
-  displayAniml = (title) => {
-    const selectedAnimal = Data.find(animle => {
-      if (animle.title === title) {
-        return animle;
+
+
+
+
+  selectedUpdate=(title)=> {
+    let selected=[];
+    Data.forEach((beast)=>{
+      if (beast.title === title) {
+        selected =beast;
       }
     })
-    this.setState({
-      show: true,
-      selectedAnimal: selectedAnimal,
-    })
-  } 
-  render() {
-    return (
-      <div>  
-        <Header/>
-        <Main  Data={this.state.Data}
-          handleShow={this.handleShow}
-          displayAniml={this.displayAniml}
-        />
-        <Footer/>
-      </div>
-    );
+    this.setState({showModel: true,selectedBeast:selected})
   }
+
+  handleClose= ()=>{
+    this.setState({showModel:false})
+  }
+
+
+  render(){
+    return(
+      <div>
+        <Header />
+       
+        <div >
+        <Main
+        updateForm={this.updateForm}
+        
+        Data={this.state.Data}
+        selectedUpdate={this.selectedUpdate}
+        />
+        </div>
+        <SelectedBeast 
+        Data = {this.state.selectedBeast}
+        show= {this.state.showModel}
+        handleClose = {this.handleClose}
+        />
+        <Footer />
+      </div>
+    )
+  }
+
 
 }
 
